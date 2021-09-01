@@ -1,7 +1,7 @@
 
 
 <template lang='pug'>
-
+h1.text-fb hi
 </template>
 
 <style lang='stylus'>
