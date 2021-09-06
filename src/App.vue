@@ -227,7 +227,7 @@ export default {
 
 
 <template lang='pug'>
-header(class="w-full h-[56px] bg-fb-header fixed top-0 left-0 right-0 flex items-center justify-between px-4")
+header(class="w-full h-[56px] bg-fb-header fixed top-0 left-0 right-0 flex items-center justify-between px-4 z-20")
 
   //- header left
   div(class="flex items-center")
