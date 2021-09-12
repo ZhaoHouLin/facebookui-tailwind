@@ -22,6 +22,8 @@ export default {
 
     const storyList = ref()
 
+    const swiperWrapperLive = ref()
+
     const renderLeftItem = (name,imgUrl)=> {
       const leftItem =`
         <div
@@ -211,6 +213,57 @@ export default {
     }
 
 
+    const renderLiveItem = ()=> {
+
+      for (let index = 0; index < 20; index++) {
+        const divBox = document.createElement('div')
+        divBox.classList.add('swiper-slide')
+  
+        const item = `
+          <div class="w-[55px]">
+            <div class="relative w-[40px] cursor-pointer">
+              <div class="overflow-hidden rounded-full">
+                <img
+                  src="https://bruce-fe-fb.web.app/image/avator.png"
+                  alt=""
+                />
+              </div>
+              <div
+                class="
+                  w-[10px]
+                  h-[10px]
+                  rounded-full
+                  bg-green-500
+                  absolute
+                  bottom-0
+                  right-0
+                  ring-gray-900 ring
+                "
+              ></div>
+            </div>
+          </div>
+        `
+        divBox.innerHTML = item
+        swiperWrapperLive.value.appendChild(divBox)
+        
+      }
+
+      new Swiper(".fb-live", {
+        // slidesPerView: 3,
+        // spaceBetween: 30,
+        loop: false,
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+        slidesPerView: "auto",
+        // pagination: {
+        //   el: ".swiper-pagination",
+        //   clickable: true,
+        // },
+      });
+    }
+
     const panels = ref([plusPanel,msgPanel,notificationPanel,morePanel])
 
     const openPanel = (index,event)=> {
@@ -243,6 +296,7 @@ export default {
       renderLeftBlock()
       renderRightBlock()
       renderStoryItem()
+      renderLiveItem()
     })
 
 
@@ -259,7 +313,8 @@ export default {
       openPanel,
       leftBlock,
       rightBlock,
-      storyList
+      storyList,
+      swiperWrapperLive
     }
   }
 }
@@ -355,7 +410,7 @@ main(class="min-h-[100vh] pt-main-span flex")
 
   #left-block.hidden.sticky.top-main-span.w-full.h-full.pl-4(class='max-w-[360px] lg:block' ref='leftBlock')
 
-  //- 限實動態
+  //- 限時動態
   div(class="max-w-[744px] w-full mx-auto px-4")
     .relative
       #story-list.flex.overflow-x-auto.no-scrollbar(ref='storyList')
@@ -375,13 +430,12 @@ main(class="min-h-[100vh] pt-main-span flex")
         //-   img.w-full.h-full.duration-200(id='story-image-${index}' class='hover:scale-105' src='https://bruce-fe-fb.web.app/image/story.png')
         //-   p.absolute.bottom-2.left-2.text-white RaidenLin
 
-
       button.absolute.popover-btn.-right-3.z-10(class='top-[calc(50%-22.5px)] w-[45px] h-[45px]')
         img(src='https://bruce-fe-fb.web.app/image/right-arrow.svg')
 
 
     //- 在想什麼
-    .rounded-lg.mt-4.px-4.py-3.bg-fb-card
+    .card
       .flex.pb-4
         .rounded-full.overflow-hidden.mr-3(class='w-[40px]')
           img(src='https://bruce-fe-fb.web.app/image/avator.png')
@@ -401,6 +455,38 @@ main(class="min-h-[100vh] pt-main-span flex")
           div(class='w-[16px]')
             img(src='https://bruce-fe-fb.web.app/image/feel.svg' alt='')
           p.text-gray-400.text-sm(class='pl-1.5') 感受／活動
+
+    //- 開包廂
+    .card.pr-0.flex
+      .swiper-container.fb-live.overflow-hidden.relative
+        #swiper-wrapper-live.swiper-wrapper(ref='swiperWrapperLive')
+          .swiper-slide
+            button.mr-4.px-4.ring-2.ring-gray-600.flex.items-center.rounded-full(class='h-[40px] focus:outline-none')
+              div(class='w-[24px]')
+                img(src='https://bruce-fe-fb.web.app/image/video.svg' alt='')
+              p.ml-2.text-fb.text-sm.font-bold
+                | 建立包廂
+          //- .swiper-slide
+          //-   div(class='w-[55px]')
+          //-     .relative.cursor-pointer(class='w-[40px]')
+          //-       .overflow-hidden.rounded-full
+          //-         img(src='https://bruce-fe-fb.web.app/image/avator.png' alt='')
+          //-       .rounded-full.bg-green-500.absolute.bottom-0.right-0.ring-gray-900.ring(class='w-[10px] h-[10px]')
+        .swiper-button-next
+        .swiper-button-prev
+
+
+
+      //- button.mr-4.px-4.ring-2.ring-gray-600.flex.items-center.rounded-full(class='h-[40px] focus:outline-none')
+      //-   div(class='w-[24px]')
+      //-     img(src='https://bruce-fe-fb.web.app/image/video.svg' alt='')
+      //-   p.ml-2.text-fb.text-sm.font-bold
+      //-     | 建立包廂
+      //- div(class='w-[55px]')
+      //-   .relative.cursor-pointer(class='w-[40px]')
+      //-     .overflow-hidden.rounded-full
+      //-       img(src='https://bruce-fe-fb.web.app/image/avator.png' alt='')
+      //-     .rounded-full.bg-green-500.absolute.bottom-0.right-0.ring-gray-900.ring(class='w-[10px] h-[10px]')
 
 
 
