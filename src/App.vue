@@ -322,7 +322,7 @@ export default {
 
 
 <template lang='pug'>
-header(class="w-full h-[56px] bg-fb-header fixed top-0 left-0 right-0 flex items-center justify-between px-4 z-20")
+header(class="w-full h-[56px] bg-fb-header fixed top-0 left-0 right-0 flex items-center justify-between px-4 z-40")
 
   //- header left
   div(class="flex items-center")
@@ -430,7 +430,7 @@ main(class="min-h-[100vh] pt-main-span flex")
         //-   img.w-full.h-full.duration-200(id='story-image-${index}' class='hover:scale-105' src='https://bruce-fe-fb.web.app/image/story.png')
         //-   p.absolute.bottom-2.left-2.text-white RaidenLin
 
-      button.absolute.popover-btn.-right-3.z-10(class='top-[calc(50%-22.5px)] w-[45px] h-[45px]')
+      button.absolute.popover-btn.-right-3.z-30(class='top-[calc(50%-22.5px)] w-[45px] h-[45px]')
         img(src='https://bruce-fe-fb.web.app/image/right-arrow.svg')
 
 
@@ -441,7 +441,7 @@ main(class="min-h-[100vh] pt-main-span flex")
           img(src='https://bruce-fe-fb.web.app/image/avator.png')
         .bg-fb-input.flex-1.rounded-full.flex.items-center
           p.text-left.text-sm.pl-3.text-gray-400
-            | 布魯斯，在想些什麼？
+            | Raiden，在想些什麼？
       .border-t.border-gray-700.flex.pt-3
         button.flex-1.rounded-lg.flex.items-center.justify-center(class='h-[40px] hover:bg-fb-input')
           div(class='w-[16px]')
@@ -476,22 +476,87 @@ main(class="min-h-[100vh] pt-main-span flex")
         .swiper-button-prev
 
 
+    .card.pb-0.px-0
+      //- 貼文標題
+      .flex.px-4
+        .rounded-full.overflow-hidden.mr-3(class='w-[44px]')
+          img(src='https://bruce-fe-fb.web.app/image/avator.png')
+        .flex-1
+          p.text-white Raiden
+          .flex.items-center.text-gray-400.text-sm
+            div 5小時
+            div ．
+            div(class='w-[12px]')
+              img.w-full(src='https://bruce-fe-fb.web.app/image/earth.svg')
+        button(class='w-[12px] focus:outline-none')
+          img(src='https://bruce-fe-fb.web.app/image/more.svg' alt='')
 
-      //- button.mr-4.px-4.ring-2.ring-gray-600.flex.items-center.rounded-full(class='h-[40px] focus:outline-none')
-      //-   div(class='w-[24px]')
-      //-     img(src='https://bruce-fe-fb.web.app/image/video.svg' alt='')
-      //-   p.ml-2.text-fb.text-sm.font-bold
-      //-     | 建立包廂
-      //- div(class='w-[55px]')
-      //-   .relative.cursor-pointer(class='w-[40px]')
-      //-     .overflow-hidden.rounded-full
-      //-       img(src='https://bruce-fe-fb.web.app/image/avator.png' alt='')
-      //-     .rounded-full.bg-green-500.absolute.bottom-0.right-0.ring-gray-900.ring(class='w-[10px] h-[10px]')
+      //- 貼文內文
+      p.text-base.text-gray-300.mt-3.px-4
+        | Raiden
+      //- 貼文圖片
+      //- inline
+      a.block.mt-3(href='#')
+        .w-full.overflow-hidden(class='h-[260px]')
+          img.object-cover.w-full(src='https://bruce-fe-fb.web.app/image/item.png')
+        .bg-fb-input.w-full.px-4.py-2.text-white
+          p.text-gray-400.text-sm WWW.RAIDEN.COM
+          p.text-lg 【Raiden】手作蛋糕台北分店開幕囉！！
+      //- 讚、留言
+      .px-4
+        .border-b.border-gray-700.flex.justify-between.py-3
+          .flex.items-center
+            .mr-2(class='w-[18px]')
+              img(src='https://bruce-fe-fb.web.app/image/like-blue.svg')
+            p.text-sm.text-gray-400 666
+          .flex.items-center
+            p.text-sm.text-gray-400.mr-2 4則留言
+            p.text-sm.text-gray-400 1次分享
+        .flex.items-center.py-2
+          button.flex-1.rounded-lg.flex.items-center.justify-center(class='h-[40px] hover:bg-fb-input')
+            div(class='w-[16px]')
+              img(src='https://bruce-fe-fb.web.app/image/like.svg' alt='')
+            p.text-gray-400.text-sm(class='pl-1.5') 讚
+          button.flex-1.rounded-lg.flex.items-center.justify-center(class='h-[40px] hover:bg-fb-input')
+            div(class='w-[16px]')
+              img(src='https://bruce-fe-fb.web.app/image/chat.svg' alt='')
+            p.text-gray-400.text-sm(class='pl-1.5') 留言
+          button.flex-1.rounded-lg.flex.items-center.justify-center(class='h-[40px] hover:bg-fb-input')
+            div(class='w-[16px]')
+              img(src='https://bruce-fe-fb.web.app/image/share.svg' alt='')
+            p.text-gray-400.text-sm(class='pl-1.5') 分享
 
+    //- 貼文牆 (Loading)
+    .card.pb-0.px-0.animate-pulse
+      //- 貼文標題
+      .flex.px-4.items-center.mb-4
+        .rounded-full.overflow-hidden.mr-3.bg-fb-input(class='w-[44px] h-[44px]')
+        .flex.content-evenly.flex-wrap(class='w-[200px] h-[50px]')
+          .bg-fb-input.rounded-full(class='h-[16px] w-[200px]')
+          .bg-fb-input.rounded-full(class='h-[12px] w-[100px]')
+      .w-full.bg-fb-input(class='h-[260px]')
+    //- 貼文牆 (Loading)
+    .card.pb-0.px-0.animate-pulse
+      //- 貼文標題
+      .flex.px-4.items-center.mb-4
+        .rounded-full.overflow-hidden.mr-3.bg-fb-input(class='w-[44px] h-[44px]')
+        .flex.content-evenly.flex-wrap(class='w-[200px] h-[50px]')
+          .bg-fb-input.rounded-full(class='h-[16px] w-[200px]')
+          .bg-fb-input.rounded-full(class='h-[12px] w-[100px]')
+      .w-full.bg-fb-input(class='h-[260px]')
+    //- 貼文牆 (Loading)
+    .card.pb-0.px-0.animate-pulse
+      //- 貼文標題
+      .flex.px-4.items-center.mb-4
+        .rounded-full.overflow-hidden.mr-3.bg-fb-input(class='w-[44px] h-[44px]')
+        .flex.content-evenly.flex-wrap(class='w-[200px] h-[50px]')
+          .bg-fb-input.rounded-full(class='h-[16px] w-[200px]')
+          .bg-fb-input.rounded-full(class='h-[12px] w-[100px]')
+      .w-full.bg-fb-input(class='h-[260px]')
 
 
   #right-block.hidden.sticky.top-main-span.w-full.h-full(class='max-w-[360px] lg:block' ref='rightBlock')
-  //- #right-block.hidden.sticky.top-main-span.w-full.h-full(class='max-w-[360px] lg:block' ref='rightBlock' style='z-index: -1')
+
 
 </template>
 
