@@ -20,6 +20,8 @@ export default {
     const leftBlock = ref()
     const rightBlock = ref()
 
+    const storyList = ref()
+
     const renderLeftItem = (name,imgUrl)=> {
       const leftItem =`
         <div
@@ -171,6 +173,43 @@ export default {
       rightBlock.value.innerHTML = htmlStr
     }
 
+    const renderStoryItem = ()=> {
+      
+      for (let index = 0; index < 5; index++) {
+        const divBox = document.createElement('div')
+        divBox.classList.add('flex-1','cursor-pointer','px-[4px]','min-w-[120px]')
+        divBox.innerHTML = `
+          <div class="relative overflow-hidden" id="story-${index}">
+            <div id="story-mask-${index}" class="hidden absolute w-full h-full top-0 left-0 bg-black/20 z-20"></div>
+            <div class="absolute top-4 left-4 ring-4 ring-fb bg-fb-card rounded-full flex justify-center items-center z-30 w-[32px] h-[32px]">
+              <p class="text-white text-sm">R</p>
+            </div>
+            <div class="absolute w-full h-full top-0 left-0 bg-gradient-to-b to-transparent from-black/30 z-20"></div>
+            <img id="story-image-${index}" class="w-full h-full duration-200 hover:scale-105" src="https://bruce-fe-fb.web.app/image/story.png" />
+            <p class="absolute bottom-2 left-2 text-white">RaidenLin</p>
+          </div>
+        `
+
+        divBox.addEventListener('mouseover',()=> {
+          const mask = document.getElementById(`story-mask-${index}`)
+          const image = document.getElementById(`story-image-${index}`)
+          mask.classList.remove('hidden')
+          image.classList.add('scale-105')
+        })
+
+        divBox.addEventListener('mouseout',()=> {
+          const mask = document.getElementById(`story-mask-${index}`)
+          const image = document.getElementById(`story-image-${index}`)
+          mask.classList.add('hidden')
+          image.classList.remove('scale-105')
+        })
+
+        storyList.value.appendChild(divBox)
+
+      }
+
+    }
+
 
     const panels = ref([plusPanel,msgPanel,notificationPanel,morePanel])
 
@@ -203,6 +242,7 @@ export default {
 
       renderLeftBlock()
       renderRightBlock()
+      renderStoryItem()
     })
 
 
@@ -217,9 +257,9 @@ export default {
       morePanel,
       panelStopPropagation,
       openPanel,
-      // renderLeftItem,
       leftBlock,
-      rightBlock
+      rightBlock,
+      storyList
     }
   }
 }
@@ -313,15 +353,57 @@ header(class="w-full h-[56px] bg-fb-header fixed top-0 left-0 right-0 flex items
 
 main(class="min-h-[100vh] pt-main-span flex")
 
-  //- div(class="hidden sticky top-main-span max-w-[360px] w-full h-full lg:block")
-  //-   p(class="w-full bg-blue-300") 左側資訊欄
   #left-block.hidden.sticky.top-main-span.w-full.h-full.pl-4(class='max-w-[360px] lg:block' ref='leftBlock')
 
-  div(class="max-w-[744px] w-full mx-auto h-[200vh]")
-    p(class="w-full bg-white") 動態牆
+  //- 限實動態
+  div(class="max-w-[744px] w-full mx-auto px-4")
+    .relative
+      #story-list.flex.overflow-x-auto.no-scrollbar(ref='storyList')
+        .flex-1.cursor-pointer(class='px-[4px] min-w-[120px]')
+          .h-full.flex.flex-col
+            .h-full.overflow-hidden
+              img.object-cover.w-full.h-full.duration-500(class='hover:scale-105' src='https://bruce-fe-fb.web.app/image/avator.png')
+            .bg-fb-card.pt-6.px-2.pb-2.relative
+              button.p-2.absolute.-top-4.bg-fb.rounded-full.ring-fb-card.ring.flex.justify-center.items-center(class='w-[32px] h-[32px] left-[calc(50%-16px)] focus:outline-none')
+                img(src='https://bruce-fe-fb.web.app/image/plus.svg')
+              p.w-full.text-center.text-white 建立限時動態
+        //- .relative.overflow-hidden(id='story-${index}')
+        //-   .hidden.absolute.w-full.h-full.top-0.left-0.z-20(id='story-mask-${index}' class='bg-black/20')
+        //-   .absolute.top-4.left-4.ring-4.ring-fb.bg-fb-card.rounded-full.flex.justify-center.items-center.z-30(class='w-[32px] h-[32px]')
+        //-     p.text-white.text-sm R
+        //-   .absolute.w-full.h-full.top-0.left-0.bg-gradient-to-b.to-transparent.z-20(class='from-black/30')
+        //-   img.w-full.h-full.duration-200(id='story-image-${index}' class='hover:scale-105' src='https://bruce-fe-fb.web.app/image/story.png')
+        //-   p.absolute.bottom-2.left-2.text-white RaidenLin
 
-  //- div(class="hidden sticky top-main-span max-w-[360px] w-full h-full lg:block")
-  //-   p(class="w-full bg-green-300") 右側聯絡人
+
+      button.absolute.popover-btn.-right-3.z-10(class='top-[calc(50%-22.5px)] w-[45px] h-[45px]')
+        img(src='https://bruce-fe-fb.web.app/image/right-arrow.svg')
+
+
+    //- 在想什麼
+    .rounded-lg.mt-4.px-4.py-3.bg-fb-card
+      .flex.pb-4
+        .rounded-full.overflow-hidden.mr-3(class='w-[40px]')
+          img(src='https://bruce-fe-fb.web.app/image/avator.png')
+        .bg-fb-input.flex-1.rounded-full.flex.items-center
+          p.text-left.text-sm.pl-3.text-gray-400
+            | 布魯斯，在想些什麼？
+      .border-t.border-gray-700.flex.pt-3
+        button.flex-1.rounded-lg.flex.items-center.justify-center(class='h-[40px] hover:bg-fb-input')
+          div(class='w-[16px]')
+            img(src='https://bruce-fe-fb.web.app/image/camera.svg' alt='')
+          p.text-gray-400.text-sm(class='pl-1.5') 直播視訊
+        button.flex-1.rounded-lg.flex.items-center.justify-center(class='h-[40px] hover:bg-fb-input')
+          div(class='w-[16px]')
+            img(src='https://bruce-fe-fb.web.app/image/photo.svg' alt='')
+          p.text-gray-400.text-sm(class='pl-1.5') 相片／影片
+        button.flex-1.rounded-lg.flex.items-center.justify-center(class='h-[40px] hover:bg-fb-input')
+          div(class='w-[16px]')
+            img(src='https://bruce-fe-fb.web.app/image/feel.svg' alt='')
+          p.text-gray-400.text-sm(class='pl-1.5') 感受／活動
+
+
+
   #right-block.hidden.sticky.top-main-span.w-full.h-full(class='max-w-[360px] lg:block' ref='rightBlock')
   //- #right-block.hidden.sticky.top-main-span.w-full.h-full(class='max-w-[360px] lg:block' ref='rightBlock' style='z-index: -1')
 
@@ -337,11 +419,4 @@ main(class="min-h-[100vh] pt-main-span flex")
   // margin-top 60px
   height 100vh
 
-#right-block
-  z-index 0
-
-// .popover-panel
-//   position fixed
-//   z-index 999
-//   margin-right  3rem
 </style>
