@@ -7,6 +7,6 @@ Demo網頁: https://zhaohoulin.github.io/facebookui-tailwind/
 
 ## 功能 & 特色
 * 前端框架 Vite + Vue3
-* html預處理 Pug 搭配TilwindCSS
+* html預處理 Pug 搭配TailwindCSS
 
 
